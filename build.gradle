@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.jfrog.bintray' version '1.8.0'
 }
 
 apply plugin: 'java'
@@ -25,14 +26,13 @@ dependencies {
     compile('org.apache.jena:jena-core:3.9.0')
     compile('org.apache.jena:jena-arq:3.9.0')
 
-    // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
     testCompile('org.slf4j:slf4j-simple:1.7.25')
-
-
     testCompile("cglib:cglib-nodep:${cglibVersion}")
     testCompile("org.spockframework:spock-core:${spockSpringVersion}")
+}
 
-
+if (project.hasProperty('bintrayUser') && project.hasProperty('bintrayKey')) {
+    apply from: 'https://raw.githubusercontent.com/FINTlibs/fint-buildscripts/v1.3.0/bintray.gradle'
 }
 
 

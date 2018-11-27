@@ -50,8 +50,18 @@ public class DatasetBuilder {
             return this;
         }
 
+        public DatasetResourceBuilder title(String title, String lang) {
+            resource.addProperty(DCTerms.title, title, lang);
+            return this;
+        }
+
         public DatasetResourceBuilder description(String description) {
             resource.addProperty(DCTerms.description, description, ISO6391.NB);
+            return this;
+        }
+
+        public DatasetResourceBuilder description(String description, String lang) {
+            resource.addProperty(DCTerms.description, description, lang);
             return this;
         }
 
@@ -95,6 +105,11 @@ public class DatasetBuilder {
             return this;
         }
 
+        public DatasetResourceBuilder keyword(String keyword, String lang) {
+            resource.addProperty(DCAT.keyword, keyword, lang);
+            return this;
+        }
+
         public DatasetResourceBuilder provenance(String provenance) {
             resource.addProperty(DCTerms.provenance, provenance);
             return this;
@@ -131,12 +146,16 @@ public class DatasetBuilder {
         }
 
         private void addLegalBasis(Resource resource, Property property, LegalBasis legalBasis) {
+            addLegalBasis(resource, property, legalBasis, ISO6391.NB);
+        }
+
+        private void addLegalBasis(Resource resource, Property property, LegalBasis legalBasis, String lang) {
             resource.addProperty(property,
                     model.createResource()
                             .addProperty(RDF.type, SKOS.Concept)
                             .addProperty(RDF.type, DCTerms.RightsStatement)
                             .addProperty(DCTerms.source, legalBasis.getSource())
-                            .addProperty(SKOS.prefLabel, legalBasis.getLabel(), ISO6391.NB)
+                            .addProperty(SKOS.prefLabel, legalBasis.getLabel(), lang)
             );
         }
 
