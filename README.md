@@ -3,6 +3,7 @@ Bibliotek for å bygge DCAT modeller for integrasjon med Felles Datakatalog. Se 
 
 ## Installation
 
+**Gradle**
 ```groovy
 repositories {
     mavenCentral()
@@ -15,6 +16,7 @@ repositories {
 compile('no.fint:fint-fdk-dcat:1.0.0-rc-2')
 ```
 
+**Maven**
 ```xml
 <dependency>
   <groupId>no.fint</groupId>
