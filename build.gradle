@@ -8,7 +8,6 @@ apply plugin: 'maven'
 apply plugin: 'groovy'
 
 group 'no.fint'
-version 'SNAPSHOT-1.0.0'
 
 sourceCompatibility = 1.8
 
