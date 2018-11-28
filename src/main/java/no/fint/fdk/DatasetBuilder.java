@@ -29,7 +29,7 @@ public class DatasetBuilder {
         return new DatasetResourceBuilder(organisationNumber, identifier);
     }
 
-    private class DatasetResourceBuilder {
+    public class DatasetResourceBuilder {
 
         private Resource resource;
 

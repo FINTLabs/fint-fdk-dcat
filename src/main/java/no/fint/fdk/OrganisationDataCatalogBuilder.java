@@ -36,7 +36,7 @@ public class OrganisationDataCatalogBuilder {
         return new OrganisationDataCatalogModelBuilder();
     }
 
-    private class OrganisationDataCatalogModelBuilder {
+    public class OrganisationDataCatalogModelBuilder {
 
         public OrganisationDataCatalogModelBuilder organisation(Model organisation) {
             model.add(organisation);
