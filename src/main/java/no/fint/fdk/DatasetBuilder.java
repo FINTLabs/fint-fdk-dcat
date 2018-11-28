@@ -35,10 +35,11 @@ public class DatasetBuilder {
 
         private DatasetResourceBuilder(String organisationNumber, String identifier) {
             resource = model.createResource(Utilities.getDatasetResourceURI(organisationNumber, identifier))
-                    .addProperty(RDF.type, DCAT.dataset)
+                    .addProperty(RDF.type, DCAT.Dataset)
                     .addProperty(DCTerms.language, model.createResource(EuMetadataRegistry.Language.NOR))
-                    .addProperty(DCTerms.identifier, identifier)
-                    .addProperty(DCTerms.publisher, Utilities.getOrganisationResourceURI(organisationNumber));
+                    .addProperty(DCTerms.identifier, model.createResource(Utilities.getDatasetResourceURI(organisationNumber, identifier)))
+                    .addProperty(DCTerms.publisher,
+                            model.createResource(Utilities.getOrganisationResourceURI(organisationNumber)));
         }
 
         public Model build() {
@@ -66,7 +67,7 @@ public class DatasetBuilder {
         }
 
         public DatasetResourceBuilder theme(String theme) {
-            resource.addProperty(DCAT.theme, theme);
+            resource.addProperty(DCAT.theme, model.createResource(theme));
             return this;
         }
 
@@ -96,7 +97,7 @@ public class DatasetBuilder {
         }
 
         public DatasetResourceBuilder spatial(String spatial) {
-            resource.addProperty(DCTerms.spatial, spatial);
+            resource.addProperty(DCTerms.spatial, model.createResource(spatial));
             return this;
         }
 

@@ -4,7 +4,7 @@ public enum Constants {
 
     ;
 
-    public final static String BRREG_NS = "http://data.brreg.no/enhetsregisteret/enhet/%s";
-    public final static String FINT_CATALOG_NS = "http://data.felleskomponent.no/%s/catalog";
-    public final static String FINT_DATASET_NS = "http://data.felleskomponent.no/%s/dataset/%s";
+    public final static String BRREG_NS = "https://data.brreg.no/enhetsregisteret/enhet/%s";
+    public final static String FINT_CATALOG_NS = "https://data.felleskomponent.no/catalogs/%s/catalog";
+    public final static String FINT_DATASET_NS = "https://data.felleskomponent.no/catalogs/%s/dataset/%s";
 }
