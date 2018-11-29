@@ -54,7 +54,7 @@ public class DatasetBuilder {
             resource = model.createResource(Utilities.getDatasetResourceURI(organisationNumber, identifier))
                     .addProperty(RDF.type, DCAT.Dataset)
                     .addProperty(DCTerms.language, model.createResource(EuMetadataRegistry.Language.NOR))
-                    .addProperty(DCTerms.identifier, model.createResource(Utilities.getDatasetResourceURI(organisationNumber, identifier)))
+                    .addProperty(DCTerms.identifier, Utilities.getDatasetResourceURI(organisationNumber, identifier))
                     .addProperty(DCTerms.publisher,
                             model.createResource(Utilities.getOrganisationResourceURI(organisationNumber)));
         }

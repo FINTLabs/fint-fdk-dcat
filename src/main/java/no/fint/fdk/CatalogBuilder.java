@@ -62,7 +62,8 @@ public class CatalogBuilder {
             resource = model.createResource(Utilities.getCatalogResourceURI(organisationNumber))
                     .addProperty(RDF.type, DCAT.Catalog)
                     .addProperty(DCTerms.title, String.format("Datakatalog for %s", organisationName), lang)
-                    .addProperty(DCTerms.description, String.format("Datakatalog for %s", organisationName), lang);
+                    .addProperty(DCTerms.description, String.format("Datakatalog for %s", organisationName), lang)
+                    .addProperty(DCTerms.publisher, model.createResource(Utilities.getOrganisationResourceURI(organisationNumber)));
         }
 
 
