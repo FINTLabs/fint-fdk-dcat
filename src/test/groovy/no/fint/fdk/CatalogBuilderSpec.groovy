@@ -18,7 +18,7 @@ class CatalogBuilderSpec extends Specification {
 
         then:
         model != null
-        model.size() == 3
+        model.size() == 4
 
     }
 
@@ -32,7 +32,7 @@ class CatalogBuilderSpec extends Specification {
 
         then:
         build != null
-        build.size() == 5
+        build.size() == 6
 
     }
 }

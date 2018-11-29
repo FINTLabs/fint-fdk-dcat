@@ -84,7 +84,7 @@ class OrganisationDataCatalogBuilderSpec extends Specification {
         build.write(System.out, Lang.TURTLE.getName())
 
         then:
-        build.size() == 102
+        build.size() == 103
 
     }
 }
