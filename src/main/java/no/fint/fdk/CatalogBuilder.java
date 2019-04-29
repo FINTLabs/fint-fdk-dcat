@@ -41,7 +41,7 @@ public class CatalogBuilder {
     }
 
     public CatalogResourceBuilder organisation(String organizationResourceURI) {
-        return new CatalogResourceBuilder(organizationResourceURI);
+        return organisation(ISO6391.NB, organizationResourceURI);
     }
 
     public CatalogResourceBuilder organisation(String lang, String organizationResourceURI) {
@@ -56,10 +56,6 @@ public class CatalogBuilder {
             this.lang = lang;
             resource = model.createResource(organizationResourceURI)
                     .addProperty(RDF.type, DCAT.Catalog);
-        }
-
-        private CatalogResourceBuilder(String organizationResourceURI) {
-            this(ISO6391.NB, organizationResourceURI);
         }
 
         public CatalogResourceBuilder title(String title) {
