@@ -39,33 +39,42 @@ public class CatalogBuilder {
         return new CatalogBuilder();
     }
 
-    public CatalogResourceBuilder organisation(String organisationNumber, String organisationName) {
-        return new CatalogResourceBuilder(organisationNumber, organisationName);
+    public CatalogResourceBuilder organisation(String organizationResourceURI) {
+        return new CatalogResourceBuilder(organizationResourceURI);
     }
 
-    public CatalogResourceBuilder organisation(String organisationNumber, String organisationName, String lang) {
-        return new CatalogResourceBuilder(organisationNumber, organisationName, lang);
+    public CatalogResourceBuilder organisation(String lang, String organizationResourceURI) {
+        return new CatalogResourceBuilder(lang, organizationResourceURI);
     }
 
     public class CatalogResourceBuilder {
-        private Resource resource;
+        private final Resource resource;
+        private final String lang;
 
-        private CatalogResourceBuilder(String organisationNumber, String organisationName, String lang) {
-            init(organisationNumber, organisationName, lang);
+        private CatalogResourceBuilder(String lang, String organizationResourceURI) {
+            this.lang = lang;
+            resource = model.createResource(organizationResourceURI)
+                    .addProperty(RDF.type, DCAT.Catalog);
         }
 
-        private CatalogResourceBuilder(String organisationNumber, String organisationName) {
-           init(organisationNumber, organisationName, ISO6391.NB);
+        private CatalogResourceBuilder(String organizationResourceURI) {
+            this(ISO6391.NB, organizationResourceURI);
         }
 
-        private void init(String organisationNumber, String organisationName, String lang) {
-            resource = model.createResource(Utilities.getCatalogResourceURI(organisationNumber))
-                    .addProperty(RDF.type, DCAT.Catalog)
-                    .addProperty(DCTerms.title, String.format("Datakatalog for %s", organisationName), lang)
-                    .addProperty(DCTerms.description, String.format("Datakatalog for %s", organisationName), lang)
-                    .addProperty(DCTerms.publisher, model.createResource(Utilities.getOrganisationResourceURI(organisationNumber)));
+        public CatalogResourceBuilder title(String title) {
+            resource.addProperty(DCTerms.title, title, lang);
+            return this;
         }
 
+        public CatalogResourceBuilder description(String description) {
+            resource.addProperty(DCTerms.description, description, lang);
+            return this;
+        }
+
+        public CatalogResourceBuilder publisher(String publisher) {
+            resource.addProperty(DCTerms.publisher, model.createResource(publisher));
+            return this;
+        }
 
         public CatalogResourceBuilder dataset(String dataset) {
             resource.addProperty(DCAT.dataset, model.createResource(dataset));

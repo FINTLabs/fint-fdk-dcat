@@ -2,7 +2,7 @@ package no.fint.fdk
 
 import spock.lang.Specification
 
-import static no.fint.fdk.Constants.*
+import static no.fint.fdk.Constants.BRREG_NS
 
 class UtilitiesSpec extends Specification {
 
@@ -16,21 +16,4 @@ class UtilitiesSpec extends Specification {
         uri == String.format(BRREG_NS, orgNumber)
     }
 
-    def "Get Catalog URI"() {
-
-        when:
-        def uri = Utilities.getCatalogResourceURI(orgNumber)
-
-        then:
-        uri == String.format(FINT_CATALOG_NS, orgNumber)
-    }
-
-    def "Get Dataset URI"() {
-
-        when:
-        def uri = Utilities.getDatasetResourceURI(orgNumber, "1")
-
-        then:
-        uri == String.format(FINT_DATASET_NS, orgNumber, "1")
-    }
 }

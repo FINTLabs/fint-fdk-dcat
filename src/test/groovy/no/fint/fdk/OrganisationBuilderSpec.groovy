@@ -8,7 +8,7 @@ class OrganisationBuilderSpec extends Specification {
     private organisation
 
     void setup() {
-        organisation = OrganisationBuilder.builder().organisation("971045698", "RFK")
+        organisation = OrganisationBuilder.builder().organisation("971045698", "RFK", 'http://organization' )
     }
 
     def "Build organisation"() {

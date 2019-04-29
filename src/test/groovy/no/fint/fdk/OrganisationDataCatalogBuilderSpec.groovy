@@ -15,11 +15,11 @@ class OrganisationDataCatalogBuilderSpec extends Specification {
 
     void setup() {
         organisation = OrganisationBuilder.builder()
-                .organisation(orgNum, "FK")
+                .organisation(orgNum, "FK", 'http://organization' )
                 .build()
 
         dataset1 = DatasetBuilder.builder()
-                .organisation(orgNum, "1")
+                .organisation('http://organization', 'http://organization/dataset')
                 .title("Dataset1")
                 .description("Dataset1 description")
                 .theme(EuMetadataRegistry.DataTheme.ECON)
@@ -42,7 +42,7 @@ class OrganisationDataCatalogBuilderSpec extends Specification {
                 .build()
 
         dataset2 = DatasetBuilder.builder()
-                .organisation(orgNum, "2")
+                .organisation('http://organization', 'http://organization/dataset')
                 .title("Dataset2")
                 .description("Dataset2 description")
                 .theme(EuMetadataRegistry.DataTheme.ECON)
@@ -65,9 +65,9 @@ class OrganisationDataCatalogBuilderSpec extends Specification {
                 .build()
 
         catalog = CatalogBuilder.builder()
-                .organisation(orgNum, "FK")
-                .dataset(Utilities.getDatasetResourceURI(orgNum, "1"))
-                .dataset(Utilities.getDatasetResourceURI(orgNum, "2"))
+                .organisation('http://organization')
+                .dataset('/some/dataset')
+                .dataset('/some/other/dataset')
                 .build()
     }
 
@@ -84,7 +84,7 @@ class OrganisationDataCatalogBuilderSpec extends Specification {
         build.write(System.out, Lang.TURTLE.getName())
 
         then:
-        build.size() == 103
+        build.size() == 87
 
     }
 }

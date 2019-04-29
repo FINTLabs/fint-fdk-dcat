@@ -42,21 +42,21 @@ public class DatasetBuilder {
         return new DatasetBuilder();
     }
 
-    public DatasetResourceBuilder organisation(String organisationNumber, String identifier) {
-        return new DatasetResourceBuilder(organisationNumber, identifier);
+    public DatasetResourceBuilder organisation(String organizationResourceURI, String datasetResourceURI) {
+        return new DatasetResourceBuilder(organizationResourceURI, datasetResourceURI);
     }
 
     public class DatasetResourceBuilder {
 
         private Resource resource;
 
-        private DatasetResourceBuilder(String organisationNumber, String identifier) {
-            resource = model.createResource(Utilities.getDatasetResourceURI(organisationNumber, identifier))
+        private DatasetResourceBuilder(String organizationResourceURI, String datasetResourceURI) {
+            resource = model.createResource(datasetResourceURI)
                     .addProperty(RDF.type, DCAT.Dataset)
                     .addProperty(DCTerms.language, model.createResource(EuMetadataRegistry.Language.NOR))
-                    .addProperty(DCTerms.identifier, Utilities.getDatasetResourceURI(organisationNumber, identifier))
+                    .addProperty(DCTerms.identifier, datasetResourceURI)
                     .addProperty(DCTerms.publisher,
-                            model.createResource(Utilities.getOrganisationResourceURI(organisationNumber)));
+                            model.createResource(organizationResourceURI));
         }
 
         public Model build() {
@@ -64,8 +64,7 @@ public class DatasetBuilder {
         }
 
         public DatasetResourceBuilder title(String title) {
-            resource.addProperty(DCTerms.title, title, ISO6391.NB);
-            return this;
+            return this.title(title, ISO6391.NB);
         }
 
         public DatasetResourceBuilder title(String title, String lang) {
@@ -74,8 +73,7 @@ public class DatasetBuilder {
         }
 
         public DatasetResourceBuilder description(String description) {
-            resource.addProperty(DCTerms.description, description, ISO6391.NB);
-            return this;
+            return this.description(description, ISO6391.NB);
         }
 
         public DatasetResourceBuilder description(String description, String lang) {
@@ -109,7 +107,7 @@ public class DatasetBuilder {
         }
 
         public DatasetResourceBuilder accrualPeriodicity(String accrualPeriodicity) {
-            resource.addProperty(DCTerms.accrualPeriodicity, model.createResource(EuMetadataRegistry.Frequency.CONT));
+            resource.addProperty(DCTerms.accrualPeriodicity, model.createResource(accrualPeriodicity));
             return this;
         }
 
@@ -119,8 +117,7 @@ public class DatasetBuilder {
         }
 
         public DatasetResourceBuilder keyword(String keyword) {
-            resource.addProperty(DCAT.keyword, keyword, ISO6391.NB);
-            return this;
+            return this.keyword(keyword, ISO6391.NB);
         }
 
         public DatasetResourceBuilder keyword(String keyword, String lang) {

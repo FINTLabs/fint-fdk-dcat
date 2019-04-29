@@ -36,15 +36,15 @@ public class OrganisationBuilder {
         return new OrganisationBuilder();
     }
 
-    public OrganisationResourceBuilder organisation(String organisationNumber, String organisationName) {
-        return new OrganisationResourceBuilder(organisationNumber, organisationName);
+    public OrganisationResourceBuilder organisation(String organisationNumber, String organisationName, String organizationResourceURI) {
+        return new OrganisationResourceBuilder(organisationNumber, organisationName, organizationResourceURI);
     }
 
 
     public class OrganisationResourceBuilder {
 
-        private OrganisationResourceBuilder(String organisationNumber, String organisationName) {
-            model.createResource(Utilities.getOrganisationResourceURI(organisationNumber))
+        private OrganisationResourceBuilder(String organisationNumber, String organisationName, String organizationResourceURI) {
+            model.createResource(organizationResourceURI)
                     .addProperty(DCTerms.identifier, organisationNumber)
                     .addProperty(RDF.type, FOAF.Agent)
                     .addProperty(FOAF.name, organisationName);

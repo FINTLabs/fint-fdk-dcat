@@ -8,7 +8,12 @@ class CatalogBuilderSpec extends Specification {
     private catalog
 
     void setup() {
-        catalog = CatalogBuilder.builder().organisation("12345", "FK")
+        catalog = CatalogBuilder
+                .builder()
+                .organisation('http://organization')
+                .title('Some title')
+                .description('Some description')
+                .publisher(Utilities.getOrganisationResourceURI('12345'))
     }
 
     def "Build catalog"() {

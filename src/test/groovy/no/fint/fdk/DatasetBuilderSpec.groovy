@@ -10,7 +10,7 @@ class DatasetBuilderSpec extends Specification {
     private dataset
 
     void setup() {
-        dataset = DatasetBuilder.builder().organisation("12345", "1234")
+        dataset = DatasetBuilder.builder().organisation('http://organization', 'http://organization/dataset')
     }
 
     def "Build basic Dataset"() {
@@ -44,7 +44,6 @@ class DatasetBuilderSpec extends Specification {
                 .completeness("completeness")
                 .accuracy("accuracy")
                 .currentness("currentness")
-
 
 
         when:
