@@ -2,6 +2,7 @@ package no.fint.fdk
 
 import no.fint.fdk.vocabulary.EuMetadataRegistry
 import org.apache.jena.riot.Lang
+import org.apache.jena.vocabulary.DCTypes
 import spock.lang.Specification
 
 class OrganisationDataCatalogBuilderSpec extends Specification {
@@ -47,7 +48,7 @@ class OrganisationDataCatalogBuilderSpec extends Specification {
                 .description("Dataset2 description")
                 .theme(EuMetadataRegistry.DataTheme.ECON)
                 .theme(EuMetadataRegistry.DataTheme.GOVE)
-                .type("Data")
+                .type(DCTypes.Dataset.getURI())
                 .objective("Used for testing")
                 .source("The universe")
                 .accessRights(EuMetadataRegistry.AccessRight.NON_PUBLIC)
@@ -84,7 +85,7 @@ class OrganisationDataCatalogBuilderSpec extends Specification {
         build.write(System.out, Lang.TURTLE.getName())
 
         then:
-        build.size() == 87
+        build.size() == 99
 
     }
 }

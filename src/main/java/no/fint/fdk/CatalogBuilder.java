@@ -5,6 +5,7 @@ import no.fint.fdk.vocabulary.ISO6391;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.sparql.vocabulary.FOAF;
 import org.apache.jena.vocabulary.DCAT;
 import org.apache.jena.vocabulary.DCTerms;
 import org.apache.jena.vocabulary.RDF;
@@ -71,8 +72,8 @@ public class CatalogBuilder {
             return this;
         }
 
-        public CatalogResourceBuilder publisher(String publisher) {
-            resource.addProperty(DCTerms.publisher, model.createResource(publisher));
+        public CatalogResourceBuilder publisher(String publisher, String name) {
+            resource.addProperty(DCTerms.publisher, model.createResource(publisher).addProperty(RDF.type, FOAF.Agent).addProperty(FOAF.name, name));
             return this;
         }
 
@@ -80,6 +81,20 @@ public class CatalogBuilder {
             resource.addProperty(DCAT.dataset, model.createResource(dataset));
             return this;
         }
+
+        /*
+
+        TODO: Check required RDF types for these
+        public CatalogResourceBuilder language(String language) {
+            resource.addProperty(DCTerms.language, model.createResource(language));
+            return this;
+        }
+
+        public CatalogResourceBuilder type(String type) {
+            resource.addProperty(DCTerms.type, model.createResource(type));
+            return this;
+        }
+         */
 
         public Model build() {
             return model;

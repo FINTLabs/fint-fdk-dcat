@@ -19,7 +19,7 @@ class DatasetBuilderSpec extends Specification {
         build.write(System.out, Lang.TURTLE.getName())
 
         then:
-        build.size() == 4
+        build.size() == 5
     }
 
     def "Build full Dataset"() {
@@ -51,7 +51,7 @@ class DatasetBuilderSpec extends Specification {
         build.write(System.out, Lang.TURTLE.getName())
 
         then:
-        build.size() == 47
+        build.size() == 56
 
     }
 }

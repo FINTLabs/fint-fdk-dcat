@@ -13,7 +13,7 @@ class CatalogBuilderSpec extends Specification {
                 .organisation('http://organization')
                 .title('Some title')
                 .description('Some description')
-                .publisher(Utilities.getOrganisationResourceURI('12345'))
+                .publisher(Utilities.getOrganisationResourceURI('12345'), 'Some organization')
     }
 
     def "Build catalog"() {
@@ -23,7 +23,7 @@ class CatalogBuilderSpec extends Specification {
 
         then:
         model != null
-        model.size() == 4
+        model.size() == 6
 
     }
 
@@ -37,7 +37,7 @@ class CatalogBuilderSpec extends Specification {
 
         then:
         build != null
-        build.size() == 6
+        build.size() == 8
 
     }
 }

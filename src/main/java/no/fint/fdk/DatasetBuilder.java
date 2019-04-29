@@ -2,6 +2,7 @@ package no.fint.fdk;
 
 import lombok.Data;
 import no.fint.fdk.vocabulary.*;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Property;
@@ -53,7 +54,7 @@ public class DatasetBuilder {
         private DatasetResourceBuilder(String organizationResourceURI, String datasetResourceURI) {
             resource = model.createResource(datasetResourceURI)
                     .addProperty(RDF.type, DCAT.Dataset)
-                    .addProperty(DCTerms.language, model.createResource(EuMetadataRegistry.Language.NOR))
+                    .addProperty(DCTerms.language, model.createResource(EuMetadataRegistry.Language.NOR).addProperty(RDF.type, DCTerms.LinguisticSystem))
                     .addProperty(DCTerms.identifier, datasetResourceURI)
                     .addProperty(DCTerms.publisher,
                             model.createResource(organizationResourceURI));
@@ -82,12 +83,12 @@ public class DatasetBuilder {
         }
 
         public DatasetResourceBuilder theme(String theme) {
-            resource.addProperty(DCAT.theme, model.createResource(theme));
+            resource.addProperty(DCAT.theme, model.createResource(theme).addProperty(RDF.type, SKOS.Concept).addProperty(SKOS.prefLabel, StringUtils.substringAfterLast(theme, "/"), ISO6391.EN));
             return this;
         }
 
         public DatasetResourceBuilder type(String type) {
-            resource.addProperty(DCTerms.type, type);
+            resource.addProperty(DCTerms.type, model.createResource(type).addProperty(RDF.type, SKOS.Concept).addProperty(SKOS.prefLabel, StringUtils.substringAfterLast(type, "/"), ISO6391.EN));
             return this;
         }
 
@@ -102,7 +103,7 @@ public class DatasetBuilder {
         }
 
         public DatasetResourceBuilder accessRights(String accessRights) {
-            resource.addProperty(DCTerms.accessRights, model.createResource(accessRights));
+            resource.addProperty(DCTerms.accessRights, model.createResource(accessRights).addProperty(RDF.type, DCTerms.RightsStatement));
             return this;
         }
 
@@ -112,7 +113,7 @@ public class DatasetBuilder {
         }
 
         public DatasetResourceBuilder spatial(String spatial) {
-            resource.addProperty(DCTerms.spatial, model.createResource(spatial));
+            resource.addProperty(DCTerms.spatial, model.createResource(spatial).addProperty(RDF.type, DCTerms.Location));
             return this;
         }
 
